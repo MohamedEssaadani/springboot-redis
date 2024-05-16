@@ -1,5 +1,6 @@
 package org.essaadani.springbootrediscaching.service;
 
+import lombok.AllArgsConstructor;
 import org.essaadani.springbootrediscaching.entities.ProductEntity;
 import org.essaadani.springbootrediscaching.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +10,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    @Autowired
     private ProductRepository productRepository;
 
     @Override
@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Cacheable(value = "products", key = "#id}")
+    @Cacheable(value = "products", key = "#id")
     public ProductEntity readOne(Long id) {
         return productRepository.findById(id).orElseThrow();
     }
